@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/ray_game.dir/src/main.c.o -o ray_game  -Wl,-rpath,/usr/local/lib /usr/local/lib/libraylib.so -L/usr/local/lib -lraylib 

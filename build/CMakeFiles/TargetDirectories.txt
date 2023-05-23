@@ -1,0 +1,3 @@
+/home/ericbruh/Downloads/c-lang/learn_raylib/build/CMakeFiles/ray_game.dir
+/home/ericbruh/Downloads/c-lang/learn_raylib/build/CMakeFiles/edit_cache.dir
+/home/ericbruh/Downloads/c-lang/learn_raylib/build/CMakeFiles/rebuild_cache.dir
