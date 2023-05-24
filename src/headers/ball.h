@@ -6,8 +6,8 @@
 
 #define INITBALL(w,h) \
     Vector2 ball_pos = {w/2.,h-80.}; \
-    float ball_dx  =  120; \
-    float ball_dy  =  100;
+    float ball_dx  =  0; \
+    float ball_dy  =  0;
 #endif
 
 void move_ball(
@@ -16,5 +16,6 @@ void move_ball(
         Block *blocks,
         float *ball_dx,
         float *ball_dy,
-        Sound *popsfx
+        Sound *popsfx,
+        Sound *hurt
 );

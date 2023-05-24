@@ -12,3 +12,4 @@ typedef struct BlockData {
 } Block;
 
 #endif
+void make_blocks(Block *P_block_array);

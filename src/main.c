@@ -1,21 +1,25 @@
 #include "headers/ball.h"
 #include "headers/ball_movement.c"
 #include "headers/data.h"
+#include "headers/ui.c"
+#include "headers/block.c"
 #include "raylib.h"
 #include <stdio.h>
+#include <math.h>
 #include <stdlib.h>
 
 INITBALL(SCREENWIDTH, SCREENHEIGHT);
 
 int main(void) {
-  InitWindow(SCREENWIDTH, SCREENHEIGHT, "raylib [core] example - basic window");
+  InitWindow(SCREENWIDTH, SCREENHEIGHT, "Pong!");
 
   InitAudioDevice();
-  Sound pop_noise; ; // the noise played when a block is destroyed
-  Music music; ; // the noise played when a block is destroyed
-  while (!IsAudioDeviceReady()) { }
-  pop_noise = LoadSound("../assets/audio/pop.ogg");
-  music = LoadMusicStream("../assets/audio/bg_music.mp3");
+  Sound music;// the noise played when a block is destroyed
+  while (!IsAudioDeviceReady()) { } // spins until the Audio Device is ready
+
+  music = LoadSound("../assets/audio/bg_music.mp3");
+  Sound crush = LoadSound("../assets/audio/breaking.mp3");
+  Sound hurt = LoadSound("../assets/audio/hurt.mp3");
 
   SetTargetFPS(FPS);
 
@@ -24,42 +28,40 @@ int main(void) {
   Block *block_array = NULL;
 
   block_array = (Block *)malloc(sizeof(Block) * BLOCKS);
+  make_blocks(block_array);
 
-  int index = 0;
-  for (int row = 0; row < 6; ++row) {
-    for (int column = 0; column < 8; ++column) {
-      block_array[index] = (Block){false,(Vector2){(column * 100) + 30, (row * 35) + 30}};
-      ++index;
-    }
-  }
-  printf("length %i \n", index);
-  PlayMusicStream(music);
+  PlaySound(music);
+  ball_dx = 120;
+  ball_dy = 250;
   while (!WindowShouldClose()) {
-    if (IsKeyDown(KEY_LEFT) && player_pos.x > 0) {
-      player_pos.x -= GetFrameTime() * 500.;
-      PlaySound(pop_noise);
-    }
-    if (IsKeyDown(KEY_RIGHT) && player_pos.x + PLAYERWIDTH < SCREENWIDTH) {
-      player_pos.x += GetFrameTime() * 500.;
-    }
+      /* printf("(%f,%f)\n",ball_pos.x,ball_pos.y); */
+      if (IsKeyDown(KEY_LEFT) && player_pos.x > 0) {
+          player_pos.x -= GetFrameTime() * ((abs((int)ball_dy)/1.5) + 400);
+      }
+      if (IsKeyDown(KEY_RIGHT) && player_pos.x + PLAYERWIDTH < SCREENWIDTH) {
+          player_pos.x += GetFrameTime() * ((abs((int)ball_dy)/1.5) + 400);
+      }
 
-    move_ball(&ball_pos, &player_pos, block_array, &ball_dx, &ball_dy,&pop_noise);
-
-    BeginDrawing();
-        ClearBackground(RAYWHITE);
-        for (int i = 0; i < BLOCKS; ++i) {
-          Block *block = &block_array[i];
-          if ((block == NULL) | block->deleted) { continue; }
-
-          DrawRectangleV(block->pos, (Vector2){BLOCKWIDTH, BLOCKHEIGHT}, BLACK);
-        }
-        DrawRectangleV(player_pos, (Vector2){PLAYERWIDTH, PLAYERHEIGHT}, RED);
-        DrawCircleV(player_pos, 1.0, BLACK);
-        DrawCircleV(ball_pos, BALLRADIUS, BLUE);
-    EndDrawing();
+      if (GetFrameTime() < 0.1) { //makes sure the ball doesn't too much
+          move_ball(&ball_pos, &player_pos, block_array, &ball_dx, &ball_dy,&crush,&hurt);
+      }
+      BeginDrawing();
+          ClearBackground(RAYWHITE);
+          for (int i = 0; i < BLOCKS; ++i) {
+              Block *block = &block_array[i];
+              if ((block == NULL) | block->deleted) { continue; }
+              DrawRectangleV(block->pos, (Vector2){BLOCKWIDTH, BLOCKHEIGHT}, BLACK);
+          }
+          DrawRectangleV(player_pos, (Vector2){PLAYERWIDTH, PLAYERHEIGHT}, RED);
+          DrawCircleV(ball_pos, BALLRADIUS, BLUE);
+          if (lives < 1) {
+              draw_gameover(block_array,&ball_dx,&ball_dy);
+          }
+      EndDrawing();
   }              // Detect window close button or ESC key
-  UnloadSound(pop_noise);
-  UnloadMusicStream(music);
+  UnloadSound(music);
+  UnloadSound(hurt);
+  UnloadSound(crush);
   CloseAudioDevice();
   CloseWindow(); // Close window and OpenGL context
   free(block_array);

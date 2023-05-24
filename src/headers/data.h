@@ -7,3 +7,7 @@
 #define BLOCKHEIGHT 25
 #define BLOCKS 48
 #define FPS 60
+#ifndef LIVES
+#define LIVES
+static int lives = 3;
+#endif
