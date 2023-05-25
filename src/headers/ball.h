@@ -17,5 +17,6 @@ void move_ball(
         float *ball_dx,
         float *ball_dy,
         Sound *popsfx,
-        Sound *hurt
+        Sound *hurt,
+        Sound *bounce
 );

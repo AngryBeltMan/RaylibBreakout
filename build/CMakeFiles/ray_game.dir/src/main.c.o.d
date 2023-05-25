@@ -34,6 +34,7 @@ CMakeFiles/ray_game.dir/src/main.c.o: \
  /home/ericbruh/Downloads/c-lang/learn_raylib/src/headers/ui.c \
  /home/ericbruh/Downloads/c-lang/learn_raylib/src/headers/ui.h \
  /home/ericbruh/Downloads/c-lang/learn_raylib/src/headers/block.c \
+ /home/ericbruh/Downloads/c-lang/learn_raylib/src/headers/gamestate.h \
  /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \

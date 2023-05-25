@@ -37,6 +37,7 @@ CMakeFiles/ray_game.dir/src/main.c.o: ../src/main.c \
   ../src/headers/ui.c \
   ../src/headers/ui.h \
   ../src/headers/block.c \
+  ../src/headers/gamestate.h \
   /usr/include/math.h \
   /usr/include/x86_64-linux-gnu/bits/math-vector.h \
   /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -80,6 +81,8 @@ CMakeFiles/ray_game.dir/src/main.c.o: ../src/main.c \
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/x86_64-linux-gnu/bits/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
@@ -181,6 +184,10 @@ CMakeFiles/ray_game.dir/src/main.c.o: ../src/main.c \
 
 ../src/headers/block.c:
 
+../src/headers/gamestate.h:
+
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
@@ -190,8 +197,6 @@ CMakeFiles/ray_game.dir/src/main.c.o: ../src/main.c \
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
-/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
@@ -214,5 +219,3 @@ CMakeFiles/ray_game.dir/src/main.c.o: ../src/main.c \
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/usr/include/x86_64-linux-gnu/bits/select.h:
