@@ -29,7 +29,6 @@ int main(void) {
 
   SetTargetFPS(FPS);
 
-  Vector2 player_pos = {SCREENWIDTH / 2.5, SCREENHEIGHT - 35};
 
   Block *block_array = NULL;
 
@@ -59,11 +58,10 @@ int main(void) {
                   &crush,
                   &hurt,
                   &bounce
-                  );
+          );
       }
       BeginDrawing();
           ClearBackground(RAYWHITE);
-          printf("%i\n",gamestate);
           switch (gamestate) {
               case 0: // winning case
                   draw_victory(&ball_dx,&ball_dy);
@@ -78,16 +76,18 @@ int main(void) {
                   continue;
               case 2: // still playing  case
                   printf("drawing playing\n");
+                  bool all_deleted = true;
                   for (int i = 0; i < BLOCKS; ++i) {
                       Block *block = &block_array[i];
-                      if ((block == NULL) | block->deleted) { continue; }
-                      DrawRectangleV(block->pos, (Vector2){BLOCKWIDTH, BLOCKHEIGHT}, BLACK);
+                      if ((block == NULL) | block->deleted) { continue; } else {
+                          DrawRectangleV(block->pos, (Vector2){BLOCKWIDTH, BLOCKHEIGHT}, BLACK);
+                          all_deleted = false;
+                      }
                   }
                   DrawRectangleV(player_pos, (Vector2){PLAYERWIDTH, PLAYERHEIGHT}, RED);
                   DrawCircleV(ball_pos, BALLRADIUS, BLUE);
-                  if (lives < 1) {
-                      gamestate = 1;
-                  }
+                  if (lives < 1) { gamestate = 1; }
+                  if (all_deleted) { gamestate = 0; }
                   EndDrawing();
                   continue;
           }

@@ -33,6 +33,7 @@ void colliding_wall(Vector2 *ball_pos, float *ball_dx, float *ball_dy,Sound *hur
             PlaySound(*hurt);
             *ball_dy *= 1.15;
             *ball_dx *= 1.15;
+            player_pos.x = SCREENWIDTH / 2.5;
         } else {
             *ball_dy *= -1;
         }
